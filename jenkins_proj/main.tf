@@ -15,7 +15,7 @@ provider "aws" {
 resource "aws_security_group" "jenkins-ssh" {
   name        = "jenkins-ssh"
   description = "Allow SSH inbound traffic"
-  vpc_id      = "vpc-04f12000e3bbb67f3"
+  vpc_id      = "vpc-12345abcdef"
   ingress {
     from_port   = 22
     to_port     = 22
@@ -47,9 +47,9 @@ resource "aws_security_group" "jenkins-ssh" {
 resource "aws_instance" "jenkins-server" {
   ami                    = "ami-04581fbf744a7d11f"
   instance_type          = "t2.micro"
-  key_name               = "luitproject"
+  key_name               = "your_keypair"
   vpc_security_group_ids = [aws_security_group.jenkins-ssh.id]
-  subnet_id              = "subnet-0bd8cc27db41bea3b"
+  subnet_id              = "subnet-abcdefg12345"
   user_data              = file("jenkins.sh")
 }
 
