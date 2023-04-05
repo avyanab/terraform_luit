@@ -3,9 +3,9 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "vpc_name" {
+variable "default_vpc" {
   type    = string
-  default = "default"
+  default = "vpc-123456789"
 }
 
 variable "vpc_cidr" {
@@ -26,4 +26,3 @@ variable "public_subnets" {
     "subnet-public2-us-east-1b" = 2
   }
 }
-
