@@ -58,3 +58,20 @@ resource "aws_s3_bucket_acl" "my-tf-asg-2023" {
   bucket = aws_s3_bucket.my-tf-asg-2023.id
   acl    = "private"
 }
+
+resource "aws_autoscaling_group" "my-tf-asg" {
+  desired_capacity    = 2
+  max_size            = 5
+  min_size            = 2
+  #vpc_zone_identifier = [var.subnet-public1-us-east-1a.id, var.subnet-public2-us-east-1b.id]
+
+  launch_template {
+    id = aws_launch_template.my-tf-launch.id
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "my-tf-asg"
+    propagate_at_launch = true
+  }
+}
