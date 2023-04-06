@@ -28,14 +28,15 @@ resource "aws_security_group" "tf-asg-sg" {
   }
 }
 
+#creating launch template
 resource "aws_launch_template" "my-tf-launch" {
   name = "my-tf-launch"
 
-  image_id = "ami-04581fbf744a7d11f"
+  image_id = "ami-04581fbf744a7d11f" #AMI for Amazon Linux 2
 
   instance_type = "t2.micro"
 
-  key_name = "keypair_name"
+  key_name = "key_name"
 
   vpc_security_group_ids = [aws_security_group.tf-asg-sg.id]
 
@@ -43,27 +44,17 @@ resource "aws_launch_template" "my-tf-launch" {
     resource_type = "instance"
 
     tags = {
-      Name = "tf-asg-proj"
+      Name = "template_name"
     }
   }
-
-  user_data = file("apache.sh")
-}
-
-resource "aws_s3_bucket" "my-tf-asg-2023" {
-  bucket = "my-tf-asg-2023"
-}
-
-resource "aws_s3_bucket_acl" "my-tf-asg-2023" {
-  bucket = aws_s3_bucket.my-tf-asg-2023.id
-  acl    = "private"
+  user_data = filebase64("file_name.sh")
 }
 
 resource "aws_autoscaling_group" "my-tf-asg" {
   desired_capacity    = 2
   max_size            = 5
   min_size            = 2
-  #vpc_zone_identifier = [var.subnet-public1-us-east-1a.id, var.subnet-public2-us-east-1b.id]
+  vpc_zone_identifier = [var.subnet-public1-us-east-1a, var.subnet-public2-us-east-1b]
 
   launch_template {
     id = aws_launch_template.my-tf-launch.id
