@@ -15,7 +15,7 @@ variable "ami_id" {
 
 variable "default_vpc" {
   type    = string
-  default = "vpc-04f12000e3bbb67f3"
+  default = "vpc-123456789"
 }
 
 variable "vpc_cidr" {
@@ -24,17 +24,17 @@ variable "vpc_cidr" {
 }
 
 variable "subnet-private1-us-east-1a" {
-  default = "subnet-0ed9298622589362b"
+  default = "subnet-123456789"
 }
 
 variable "subnet-private2-us-east-1b" {
-  default = "subnet-0d2208d14e0cc378f"
+  default = "subnet-123456789"
 }
 
 variable "subnet-public1-us-east-1a" {
-  default = "subnet-0bd8cc27db41bea3b"
+  default = "subnet-123456789"
 }
 
 variable "subnet-public2-us-east-1b" {
-  default = "subnet-0d09fcb733be8a23a"
+  default = "subnet-123456789"
 }
